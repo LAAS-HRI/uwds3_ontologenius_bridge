@@ -5,7 +5,7 @@ import rospy
 from uwds3_msgs.msg import WorldStamped
 from uwds3_msgs.srv import Query
 from pyuwds3.types.scene_node import SceneNode
-from pyuwds3.types.temporal_situation import TemporalSituation
+from pyuwds3.types.temporal_situation import TemporalPredicate
 from ontologenius import OntologyManipulator
 
 
@@ -49,10 +49,14 @@ class OntologeniusReaderNode(object):
                 results = self.ontologenius_client.sparql.call(query)
             else:
                 results = self.ontologenius_client.sparql.call(query)
-            for node_id in results[0]:
-                if node_id in self.scene_nodes:
-                    result_nodes.append(self.scene_nodes[node_id])
-            return result_nodes, True, ""
+            rospy.logwarn(results)
+            if len(results) > 0:
+                for node_id in results[0]:
+                    if node_id in self.scene_nodes:
+                        result_nodes.append(self.scene_nodes[node_id])
+                return result_nodes, True, ""
+            else:
+                return [], True, ""
         except Exception as e:
             rospy.logwarn("[ontologenius_reader] Exception occurred : "+str(e))
             return [], False, str(e)
@@ -68,7 +72,7 @@ class OntologeniusReaderNode(object):
                 self.created_nodes[node.id] = True
 
         for situation_msg in world_msg.world.timeline:
-            situation = TemporalSituation().from_msg(situation_msg)
+            situation = TemporalPredicate().from_msg(situation_msg)
             self.learn_affordance(situation)
             self.update_situation(situation)
 
@@ -91,6 +95,7 @@ class OntologeniusReaderNode(object):
         else:
             pass
 
+        self.ontologenius_client.feeder.addObjectProperty(scene_node.id, "hasName", scene_node.description)
         for type in types:
             self.ontologenius_client.feeder.addObjectProperty(scene_node.id, "isA", type)
 
@@ -121,9 +126,9 @@ class OntologeniusReaderNode(object):
                 self.ontologenius_client.feeder.removeObjectProperty(situation.subject, "isOn", situation.object)
         elif situation.predicate == "close":
             if not situation.is_finished():
-                self.ontologenius_client.feeder.addObjectProperty(situation.subject, "isClose", situation.object)
+                self.ontologenius_client.feeder.addObjectProperty(situation.subject, "isCloseTo", situation.object)
             else:
-                self.ontologenius_client.feeder.removeObjectProperty(situation.subject, "isClose", situation.object)
+                self.ontologenius_client.feeder.removeObjectProperty(situation.subject, "isCloseTo", situation.object)
         else:
             pass
 

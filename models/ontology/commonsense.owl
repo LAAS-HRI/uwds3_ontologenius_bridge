@@ -581,6 +581,12 @@ Values can be:
     </owl:ObjectProperty>
 
 
+    <owl:ObjectProperty rdf:about="http://kb.openrobots.org#isCloseTo">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdfs:label xml:lang="en">am close to</rdfs:label>
+        <rdfs:label xml:lang="en">are close to</rdfs:label>
+        <rdfs:label xml:lang="en">is close to</rdfs:label>
+    </owl:ObjectProperty>
 
     <!-- http://kb.openrobots.org#isOn -->
 
