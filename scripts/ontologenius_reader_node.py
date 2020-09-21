@@ -34,21 +34,22 @@ class OntologeniusReaderNode(object):
         self.query_service = rospy.Service("uwds3/query_knowledge_base", Query, self.handle_query)
 
         input_world_topic = rospy.get_param("~input_world_topic", "corrected_tracks")
-        rospy.loginfo("[ontologenius_reader] Connecting to '"+input_world_topic+"'...")
+        rospy.loginfo("[ontologenius_reader] Connecting to '" + input_world_topic +  "'...")
         self.world_subscriber = rospy.Subscriber(input_world_topic, WorldStamped, self.callback, queue_size=1)
         rospy.loginfo("[ontologenius_reader] Connected to Underworlds !")
 
     def handle_query(self, req, agent="myself"):
         """ Handle the query """
         try:
-
             query_tokens = req.query.split(",")
+            first_variable = query_tokens[0].split(" ")[0]
+            query = req.query
             result_nodes = []
             if len(query_tokens) > 1:
-                results = self.kb.findForAgent(agent, query_tokens[0].split(" ")[0], query_tokens[1:])
+                results = self.ontologenius_client.sparql.call(query)
             else:
-                results = self.kb.findForAgent(agent, query_tokens[0].split(" ")[0], query_tokens)
-            for node_id in results:
+                results = self.ontologenius_client.sparql.call(query)
+            for node_id in results[0]:
                 if node_id in self.scene_nodes:
                     result_nodes.append(self.scene_nodes[node_id])
             return result_nodes, True, ""
@@ -91,38 +92,38 @@ class OntologeniusReaderNode(object):
             pass
 
         for type in types:
-            self.ontologenius_client.addObjectProperty(scene_node.id, "isA", type)
+            self.ontologenius_client.feeder.addObjectProperty(scene_node.id, "isA", type)
 
     def update_situation(self, situation, agent="myself"):
         """ Updates the given situations """
         if situation.predicate == "pick":
             if situation.object not in self.held_by:
-                self.ontologenius_client.addObjectProperty(situation.object, "isInHand", situation.subject)
+                self.ontologenius_client.feeder.addObjectProperty(situation.object, "isInHand", situation.subject)
                 self.held_by[situation.object] = situation.subject
         elif situation.predicate == "place":
             if situation.object in self.held_by:
-                self.ontologenius_client.removeObjectProperty(situation.object, "isInHand", situation.subject)
+                self.ontologenius_client.feeder.removeObjectProperty(situation.object, "isInHand", situation.subject)
                 del self.held_by[situation.object]
         elif situation.predicate == "release":
             if situation.object in self.held_by:
-                self.ontologenius_client.removeObjectProperty(situation.object, "isInHand", situation.subject)
+                self.ontologenius_client.feeder.removeObjectProperty(situation.object, "isInHand", situation.subject)
                 del self.held_by[situation.object]
 
         if situation.predicate == "in":
             if not situation.is_finished():
-                self.ontologenius_client.addObjectProperty(situation.subject, "isIn", situation.object)
+                self.ontologenius_client.feeder.addObjectProperty(situation.subject, "isIn", situation.object)
             else:
-                self.ontologenius_client.removeObjectProperty(situation.subject, "isIn", situation.object)
+                self.ontologenius_client.feeder.removeObjectProperty(situation.subject, "isIn", situation.object)
         elif situation.predicate == "on":
             if not situation.is_finished():
-                self.ontologenius_client.addObjectProperty(situation.subject, "isOn", situation.object)
+                self.ontologenius_client.feeder.addObjectProperty(situation.subject, "isOn", situation.object)
             else:
-                self.ontologenius_client.removeObjectProperty(situation.subject, "isOn", situation.object)
+                self.ontologenius_client.feeder.removeObjectProperty(situation.subject, "isOn", situation.object)
         elif situation.predicate == "close":
             if not situation.is_finished():
-                self.ontologenius_client.addObjectProperty(situation.subject, "isClose", situation.object)
+                self.ontologenius_client.feeder.addObjectProperty(situation.subject, "isClose", situation.object)
             else:
-                self.ontologenius_client.removeObjectProperty(situation.subject, "isClose", situation.object)
+                self.ontologenius_client.feeder.removeObjectProperty(situation.subject, "isClose", situation.object)
         else:
             pass
 
@@ -130,13 +131,13 @@ class OntologeniusReaderNode(object):
         """ Learn the affordances from the physical reasoner """
         if situation.predicate == "pick":
             if situation.object not in self.graspable:
-                self.ontologenius_client.addObjectProperty(situation.subject, "isA", "GraspableObject")
+                self.ontologenius_client.feeder.addObjectProperty(situation.subject, "isA", "GraspableObject")
         elif situation.predicate == "on":
             if situation.object not in self.support:
-                self.ontologenius_client.addObjectProperty(situation.object, "isA", "PhysicalSupport")
+                self.ontologenius_client.feeder.addObjectProperty(situation.object, "isA", "PhysicalSupport")
         elif situation.predicate == "in":
             if situation.object not in self.container:
-                self.ontologenius_client.addObjectProperty(situation.object, "isA", "Container")
+                self.ontologenius_client.feeder.addObjectProperty(situation.object, "isA", "Container")
 
     def run(self):
         """ Run the component """
