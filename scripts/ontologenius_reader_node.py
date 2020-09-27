@@ -81,12 +81,12 @@ class OntologeniusReaderNode(object):
     def add_scene_node(self, scene_node, agent="myself"):
         """ Add the given scene node """
         types = []
-        if scene_node.is_located():
-            types.append("LocalizedThing")
-        elif scene_node.has_shape():
-            types.append("SolidTangibleThing")
+        if scene_node.has_shape():
+            types.append("SolidObject")
+        elif scene_node.is_located():
+            types.append("SpatialThingLocated")
         else:
-            types.append("Thing")
+            types.append("PartiallyTangibleThing")
 
         if scene_node.label == "myself":
             types.append("Robot")
@@ -95,30 +95,30 @@ class OntologeniusReaderNode(object):
         else:
             pass
 
-        self.ontologenius_client.feeder.addObjectProperty(scene_node.id, "hasName", scene_node.description)
         for type in types:
             self.ontologenius_client.feeder.addObjectProperty(scene_node.id, "isA", type)
+        self.ontologenius_client.feeder.addObjectProperty(scene_node.id, "hasName", scene_node.description)
 
     def update_situation(self, situation, agent="myself"):
         """ Updates the given situations """
         if situation.predicate == "pick":
             if situation.object not in self.held_by:
-                self.ontologenius_client.feeder.addObjectProperty(situation.object, "isInHand", situation.subject)
+                self.ontologenius_client.feeder.addObjectProperty(situation.object, "isHeldBy", situation.subject)
                 self.held_by[situation.object] = situation.subject
         elif situation.predicate == "place":
             if situation.object in self.held_by:
-                self.ontologenius_client.feeder.removeObjectProperty(situation.object, "isInHand", situation.subject)
+                self.ontologenius_client.feeder.removeObjectProperty(situation.object, "isHeldBy", situation.subject)
                 del self.held_by[situation.object]
         elif situation.predicate == "release":
             if situation.object in self.held_by:
-                self.ontologenius_client.feeder.removeObjectProperty(situation.object, "isInHand", situation.subject)
+                self.ontologenius_client.feeder.removeObjectProperty(situation.object, "isHeldBy", situation.subject)
                 del self.held_by[situation.object]
 
         if situation.predicate == "in":
             if not situation.is_finished():
-                self.ontologenius_client.feeder.addObjectProperty(situation.subject, "isIn", situation.object)
+                self.ontologenius_client.feeder.addObjectProperty(situation.subject, "isInside", situation.object)
             else:
-                self.ontologenius_client.feeder.removeObjectProperty(situation.subject, "isIn", situation.object)
+                self.ontologenius_client.feeder.removeObjectProperty(situation.subject, "isInside", situation.object)
         elif situation.predicate == "on":
             if not situation.is_finished():
                 self.ontologenius_client.feeder.addObjectProperty(situation.subject, "isOn", situation.object)
@@ -139,10 +139,10 @@ class OntologeniusReaderNode(object):
                 self.ontologenius_client.feeder.addObjectProperty(situation.subject, "isA", "GraspableObject")
         elif situation.predicate == "on":
             if situation.object not in self.support:
-                self.ontologenius_client.feeder.addObjectProperty(situation.object, "isA", "PhysicalSupport")
+                self.ontologenius_client.feeder.addObjectProperty(situation.object, "isA", "SupportObject")
         elif situation.predicate == "in":
             if situation.object not in self.container:
-                self.ontologenius_client.feeder.addObjectProperty(situation.object, "isA", "Container")
+                self.ontologenius_client.feeder.addObjectProperty(situation.object, "isA", "ContainerObject")
 
     def run(self):
         """ Run the component """
