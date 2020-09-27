@@ -140,15 +140,15 @@ class OntologeniusReaderNode(object):
                     del self.relations[situation.subject+"isOn"+situation.object]
         elif situation.predicate == "close":
             if not situation.is_finished():
-                if situation.subject+"isClose"+situation.object not in self.relations:
-                    rospy.loginfo("add: "+situation.subject+" isClose "+situation.object)
-                    self.ontologenius_client.feeder.addObjectProperty(situation.subject, "isClose", situation.object)
-                    self.relations[situation.subject+"isClose"+situation.object] = True
+                if situation.subject+"isCloseTo"+situation.object not in self.relations:
+                    rospy.loginfo("add: "+situation.subject+" isCloseTo "+situation.object)
+                    self.ontologenius_client.feeder.addObjectProperty(situation.subject, "isCloseTo", situation.object)
+                    self.relations[situation.subject+"isCloseTo"+situation.object] = True
             else:
-                if situation.subject+"isClose"+situation.object in self.relations:
-                    rospy.loginfo("remove: "+situation.subject+" isClose "+situation.object)
-                    self.ontologenius_client.feeder.removeObjectProperty(situation.subject, "isClose", situation.object)
-                    del self.relations[situation.subject+"isClose"+situation.object]
+                if situation.subject+"isCloseTo"+situation.object in self.relations:
+                    rospy.loginfo("remove: "+situation.subject+" isCloseTo "+situation.object)
+                    self.ontologenius_client.feeder.removeObjectProperty(situation.subject, "isCloseTo", situation.object)
+                    del self.relations[situation.subject+"isCloseTo"+situation.object]
         else:
             pass
 
