@@ -1,0 +1,459 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="urn:absolute:underworlds#"
+     xml:base="urn:absolute:underworlds"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="urn:absolute:underworlds"/>
+
+
+
+    <!--
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+
+
+    <!-- urn:absolute:underworlds#belongsTo -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#belongsTo">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="urn:absolute:underworlds#owns"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#canBePerformedBy -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#canBePerformedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="urn:absolute:underworlds#canPerform"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#canPerform -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#canPerform">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#contains -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#contains">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="urn:absolute:underworlds#isInside"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#hasAllocentricPosition -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#hasAllocentricPosition">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#hasAppearance -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#hasAppearance">
+        <rdfs:subPropertyOf rdf:resource="urn:absolute:underworlds#hasFeature"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#hasColor -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#hasColor">
+        <rdfs:subPropertyOf rdf:resource="urn:absolute:underworlds#hasFeature"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#hasEgocentricPosition -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#hasEgocentricPosition">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#hasFeature -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#hasFeature">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#hasInHand -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#hasInHand">
+        <rdfs:subPropertyOf rdf:resource="urn:absolute:underworlds#isAt"/>
+        <owl:inverseOf rdf:resource="urn:absolute:underworlds#isHeldBy"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#hasShape -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#hasShape">
+        <rdfs:subPropertyOf rdf:resource="urn:absolute:underworlds#hasFeature"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#hasSize -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#hasSize">
+        <rdfs:subPropertyOf rdf:resource="urn:absolute:underworlds#hasFeature"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#inFrontOf -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#inFrontOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="urn:absolute:underworlds#isBehind"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#isAt -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#isAt">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#isBehind -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#isBehind">
+        <rdfs:subPropertyOf rdf:resource="urn:absolute:underworlds#hasEgocentricPosition"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#isCloseTo -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#isCloseTo">
+        <rdfs:subPropertyOf rdf:resource="urn:absolute:underworlds#hasAllocentricPosition"/>
+        <rdfs:subPropertyOf rdf:resource="urn:absolute:underworlds#isAt"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#isFocusOf -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#isFocusOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="urn:absolute:underworlds#lookAt"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#isHeldBy -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#isHeldBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#isInside -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#isInside">
+        <rdfs:subPropertyOf rdf:resource="urn:absolute:underworlds#hasAllocentricPosition"/>
+        <rdfs:subPropertyOf rdf:resource="urn:absolute:underworlds#isAt"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#isLeftOf -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#isLeftOf">
+        <rdfs:subPropertyOf rdf:resource="urn:absolute:underworlds#hasEgocentricPosition"/>
+        <owl:inverseOf rdf:resource="urn:absolute:underworlds#isRightOf"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#isOn -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#isOn">
+        <rdfs:subPropertyOf rdf:resource="urn:absolute:underworlds#hasAllocentricPosition"/>
+        <rdfs:subPropertyOf rdf:resource="urn:absolute:underworlds#isAt"/>
+        <owl:inverseOf rdf:resource="urn:absolute:underworlds#supports"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#isReachableBy -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#isReachableBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="urn:absolute:underworlds#reaches"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#isRightOf -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#isRightOf">
+        <rdfs:subPropertyOf rdf:resource="urn:absolute:underworlds#hasEgocentricPosition"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#isVisibleBy -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#isVisibleBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="urn:absolute:underworlds#sees"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#lookAt -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#lookAt">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#owns -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#owns">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#reaches -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#reaches">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#sees -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#sees">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- urn:absolute:underworlds#supports -->
+
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#supports">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+
+
+
+    <!--
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+
+
+    <!-- urn:absolute:underworlds#Action -->
+
+    <owl:Class rdf:about="urn:absolute:underworlds#Action">
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#EventLocated"/>
+    </owl:Class>
+
+
+
+    <!-- urn:absolute:underworlds#Agent -->
+
+    <owl:Class rdf:about="urn:absolute:underworlds#Agent">
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#TangibleThing"/>
+    </owl:Class>
+
+
+
+    <!-- urn:absolute:underworlds#ContainerObject -->
+
+    <owl:Class rdf:about="urn:absolute:underworlds#ContainerObject">
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#Place"/>
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#TangibleThing"/>
+    </owl:Class>
+
+
+
+    <!-- urn:absolute:underworlds#DeformableObject -->
+
+    <owl:Class rdf:about="urn:absolute:underworlds#DeformableObject">
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#PartiallyTangibleThing"/>
+    </owl:Class>
+
+
+
+    <!-- urn:absolute:underworlds#Event -->
+
+    <owl:Class rdf:about="urn:absolute:underworlds#Event">
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#Situation"/>
+    </owl:Class>
+
+
+
+    <!-- urn:absolute:underworlds#EventLocated -->
+
+    <owl:Class rdf:about="urn:absolute:underworlds#EventLocated">
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#Event"/>
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#TemporalThingLocated"/>
+    </owl:Class>
+
+
+
+    <!-- urn:absolute:underworlds#ExistingThing -->
+
+    <owl:Class rdf:about="urn:absolute:underworlds#ExistingThing"/>
+
+
+
+    <!-- urn:absolute:underworlds#ExistingThingLocated -->
+
+    <owl:Class rdf:about="urn:absolute:underworlds#ExistingThingLocated">
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#ExistingThing"/>
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#SpatialThing"/>
+    </owl:Class>
+
+
+
+    <!-- urn:absolute:underworlds#Fact -->
+
+    <owl:Class rdf:about="urn:absolute:underworlds#Fact">
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#Situation"/>
+    </owl:Class>
+
+
+
+    <!-- urn:absolute:underworlds#GraspableObject -->
+
+    <owl:Class rdf:about="urn:absolute:underworlds#GraspableObject">
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#TangibleThing"/>
+    </owl:Class>
+
+
+
+    <!-- urn:absolute:underworlds#Human -->
+
+    <owl:Class rdf:about="urn:absolute:underworlds#Human">
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#Agent"/>
+    </owl:Class>
+
+
+
+    <!-- urn:absolute:underworlds#Location -->
+
+    <owl:Class rdf:about="urn:absolute:underworlds#Location">
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#TemporalThingLocated"/>
+    </owl:Class>
+
+
+
+    <!-- urn:absolute:underworlds#PartiallyTangibleThing -->
+
+    <owl:Class rdf:about="urn:absolute:underworlds#PartiallyTangibleThing">
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#ExistingThingLocated"/>
+    </owl:Class>
+
+
+
+    <!-- urn:absolute:underworlds#Place -->
+
+    <owl:Class rdf:about="urn:absolute:underworlds#Place">
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#ExistingThingLocated"/>
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#Location"/>
+    </owl:Class>
+
+
+
+    <!-- urn:absolute:underworlds#Robot -->
+
+    <owl:Class rdf:about="urn:absolute:underworlds#Robot">
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#Agent"/>
+    </owl:Class>
+
+
+
+    <!-- urn:absolute:underworlds#Situation -->
+
+    <owl:Class rdf:about="urn:absolute:underworlds#Situation">
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#TemporalThing"/>
+    </owl:Class>
+
+
+
+    <!-- urn:absolute:underworlds#SolidObject -->
+
+    <owl:Class rdf:about="urn:absolute:underworlds#SolidObject">
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#TangibleThing"/>
+    </owl:Class>
+
+
+
+    <!-- urn:absolute:underworlds#SpatialThing -->
+
+    <owl:Class rdf:about="urn:absolute:underworlds#SpatialThing"/>
+
+
+
+    <!-- urn:absolute:underworlds#SupportObject -->
+
+    <owl:Class rdf:about="urn:absolute:underworlds#SupportObject">
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#Place"/>
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#TangibleThing"/>
+    </owl:Class>
+
+
+
+    <!-- urn:absolute:underworlds#TangibleThing -->
+
+    <owl:Class rdf:about="urn:absolute:underworlds#TangibleThing">
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#PartiallyTangibleThing"/>
+    </owl:Class>
+
+
+
+    <!-- urn:absolute:underworlds#TemporalThing -->
+
+    <owl:Class rdf:about="urn:absolute:underworlds#TemporalThing"/>
+
+
+
+    <!-- urn:absolute:underworlds#TemporalThingLocated -->
+
+    <owl:Class rdf:about="urn:absolute:underworlds#TemporalThingLocated">
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#SpatialThing"/>
+        <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#TemporalThing"/>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
