@@ -29,7 +29,7 @@ The ontology used to describe Underworlds entities is adapted from [ORO-commonse
 * isFocusOf
 * isHeldBy
 * isInside
-* isOn
+* isOnTop
 * isReachableBy
 * isRightOf
 * isLeftOf
