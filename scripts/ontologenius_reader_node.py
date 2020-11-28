@@ -13,8 +13,9 @@ class OntologeniusReaderNode(object):
     """ The ontologenius reader which allow to query uwds3 entities with SPARQL-like queries """
     def __init__(self):
         """ Default constructor """
-
-        self.ontologenius_client = OntologyManipulator()
+        self.ontologies_manip = OntologiesManipulator()
+        self.ontologies_manip.add("robot")
+        self.ontologenius_client =self.ontologies_manip.get("robot")
         self.ontologenius_client.close()
         rospy.loginfo("[ontologenius_reader] Connected to Ontologenius !")
 

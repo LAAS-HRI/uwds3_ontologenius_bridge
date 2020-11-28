@@ -3,10 +3,10 @@
   <arg name="language" default="en"/>
   <arg name="intern_file" default="none"/>
   <arg name="config_file" default="none"/>
-  <arg name="files" default="$(find uwds3_ontologenius_bridge)/models/ontology/uwds3_ontology.owl"/>
+  <!-- <arg name="files" default="$(find uwds3_ontologenius_bridge)/models/ontology/uwds3_ontology.owl"/>
   <node name="ontologenius_core" pkg="ontologenius" type="ontologenius" output="screen" args="-l $(arg language) -c $(arg config_file) -i $(arg intern_file) $(arg files)"> </node>
   <node name="ontologenius_rest" pkg="ontologenius" type="REST.py" output="screen"> </node>
-  <node name="ontologenius_gui" pkg="ontologenius" type="ontoloGUI" output="screen"> </node>
+  <node name="ontologenius_gui" pkg="ontologenius" type="ontoloGUI" output="screen"> </node> -->
   <node name="ontologenius_reader" pkg="uwds3_ontologenius_bridge" type="ontologenius_reader_node.py" output="screen"/>
 
 </launch>
