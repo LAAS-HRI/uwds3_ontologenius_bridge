@@ -44,7 +44,7 @@ class OntologeniusReaderNode(object):
         """ Handle the query """
         try:
             query_tokens = req.query.split(",")
-            first_variable = query_tokens[0].split(" ")[0]
+            #first_variable = query_tokens[0].split(" ")[0]
             query = req.query
             result_nodes = []
             if len(query_tokens) > 1:
@@ -130,15 +130,15 @@ class OntologeniusReaderNode(object):
                     del self.relations[situation.subject+"isInside"+situation.object]
         elif situation.predicate == "on":
             if not situation.is_finished():
-                if situation.subject+"isOn"+situation.object not in self.relations:
-                    rospy.loginfo("add: "+situation.subject+" isOn "+situation.object)
-                    self.ontologenius_client.feeder.addObjectProperty(situation.subject, "isOn", situation.object)
-                    self.relations[situation.subject+"isOn"+situation.object] = True
+                if situation.subject+"isOnTop"+situation.object not in self.relations:
+                    rospy.loginfo("add: "+situation.subject+" isOnTop "+situation.object)
+                    self.ontologenius_client.feeder.addObjectProperty(situation.subject, "isOnTop", situation.object)
+                    self.relations[situation.subject+"isOnTop"+situation.object] = True
             else:
-                if situation.subject+"isOn"+situation.object in self.relations:
-                    rospy.loginfo("remove: "+situation.subject+" isOn "+situation.object)
-                    self.ontologenius_client.feeder.removeObjectProperty(situation.subject, "isOn", situation.object)
-                    del self.relations[situation.subject+"isOn"+situation.object]
+                if situation.subject+"isOnTop"+situation.object in self.relations:
+                    rospy.loginfo("remove: "+situation.subject+" isOnTop "+situation.object)
+                    self.ontologenius_client.feeder.removeObjectProperty(situation.subject, "isOnTop", situation.object)
+                    del self.relations[situation.subject+"isOnTop"+situation.object]
         elif situation.predicate == "close":
             if not situation.is_finished():
                 if situation.subject+"isCloseTo"+situation.object not in self.relations:

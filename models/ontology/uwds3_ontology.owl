@@ -194,7 +194,7 @@
 
     <!-- urn:absolute:underworlds#isOn -->
 
-    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#isOn">
+    <owl:ObjectProperty rdf:about="urn:absolute:underworlds#isOnTop">
         <rdfs:subPropertyOf rdf:resource="urn:absolute:underworlds#hasAllocentricPosition"/>
         <rdfs:subPropertyOf rdf:resource="urn:absolute:underworlds#isAt"/>
         <owl:inverseOf rdf:resource="urn:absolute:underworlds#supports"/>
@@ -411,7 +411,7 @@
 
     <!-- urn:absolute:underworlds#SolidObject -->
 
-    <owl:Class rdf:about="urn:absolute:underworlds#SolidObject">
+    <owl:Class rdf:about="urn:absolute:underworlds#Object">
         <rdfs:subClassOf rdf:resource="urn:absolute:underworlds#TangibleThing"/>
     </owl:Class>
 
